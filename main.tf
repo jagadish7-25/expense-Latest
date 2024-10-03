@@ -19,7 +19,18 @@ resource "aws_internet_gateway" "main" {
     {
       Name = local.resource_name
     }
+  )     
+}
+resource "aws_subnet" "public" {
+  count = length(var.public_subnet_cidrs)
+  vpc_id     = aws_vpc.main.id
+  availability_zone = local.az_names[count.index]
+  map_public_ip_on_launch = true
+  tags = merge(
+      var.common_tags,
+      var.public_subnet_tags,
+    {
+        Name = "${local.resource_name}-public-${local.az_names[count.index]}"
+    }
   )
-    
-  
 }

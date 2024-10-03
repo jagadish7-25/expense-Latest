@@ -25,3 +25,15 @@ variable "vpc_tags" {
 variable "igw_tags" {
   default = {}
 }
+
+variable "public_subnet_cidrs" {
+    type = list
+    validation {
+      condition = length(var.public_subnet_cidrs) == 2
+      error_message = "provide two subnets"
+    } 
+}
+variable "public_subnet_tags" {
+    default = {}
+  
+}
