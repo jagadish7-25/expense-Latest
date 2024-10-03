@@ -34,3 +34,31 @@ resource "aws_subnet" "public" {
     }
   )
 }
+
+resource "aws_subnet" "private" {
+  count = length(var.private_subnet_cidrs)
+  vpc_id     = aws_vpc.main.id
+  availability_zone = local.az_names[count.index]
+  map_public_ip_on_launch = true
+  tags = merge(
+      var.common_tags,
+      var.private_subnet_tags,
+    {
+        Name = "${local.resource_name}-private-${local.az_names[count.index]}"
+    }
+  )
+}
+
+resource "aws_subnet" "database" {
+  count = length(var.database_subnet_cidrs)
+  vpc_id     = aws_vpc.main.id
+  availability_zone = local.az_names[count.index]
+  map_public_ip_on_launch = true
+  tags = merge(
+      var.common_tags,
+      var.database_subnet_tags,
+    {
+        Name = "${local.resource_name}-database-${local.az_names[count.index]}"
+    }
+  )
+}

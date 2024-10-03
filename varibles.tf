@@ -37,3 +37,25 @@ variable "public_subnet_tags" {
     default = {}
   
 }
+variable "private_subnet_cidrs" {
+    type = list
+    validation {
+      condition = length(var.private_subnet_cidrs) == 2
+      error_message = "provide two subnets"
+    } 
+}
+variable "private_subnet_tags" {
+    default = {}
+  
+}
+variable "database_subnet_cidrs" {
+    type = list
+    validation {
+      condition = length(var.database_subnet_cidrs) == 2
+      error_message = "provide two subnets"
+    } 
+}
+variable "database_subnet_tags" {
+    default = {}
+  
+}
