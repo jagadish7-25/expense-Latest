@@ -78,6 +78,10 @@ resource "aws_db_subnet_group" "default" {
     }
   )
 }
+resource "aws_eip" "nat" {
+  domain   = "vpc"
+}
+
 
 resource "aws_nat_gateway" "main" {
   allocation_id = aws_eip.nat.id
