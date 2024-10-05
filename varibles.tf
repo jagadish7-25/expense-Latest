@@ -79,7 +79,7 @@ variable "database_route_table_tags" {
   default = {}
 }
 variable "is_peering_required" {
-  type = boolean
+  type = bool
   default = false 
 }
 variable "vpc_peering_tags" {
