@@ -59,8 +59,6 @@ variable "database_subnet_tags" {
     default = {}
   
 }
-
-
 variable "db_subnet_group_tags" {
     default = {}
 }
